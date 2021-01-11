@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <iostream>
+#include <LJRat.h>
 
 using namespace std;
 
@@ -7,10 +8,12 @@ using namespace std;
 
 INT wmain(INT argc, WCHAR *argv[])
 {
-    cout << "Build exe" << endl;
+    Run();
 }
 
 #else
+
+#define EXPORT_FUNC __declspec(dllexport)
 
 BOOL WINAPI DllMain(
     HINSTANCE hinstDLL,  // handle to DLL module
@@ -37,3 +40,10 @@ BOOL WINAPI DllMain(
 }
 
 #endif // BUILD_DLL
+
+EXPORT_FUNC INT Run(VOID)
+{
+    cout << "Exported func" << endl;
+
+    return EXIT_SUCCESS;
+}
